@@ -22,20 +22,20 @@ public class MainTest {
 		SpringApplication.run(MainTest.class, args);
 	}
 
-	@RequestMapping("/getinfo/{appid}/{code}/{time}/{key}")
+	@RequestMapping("/getinfo/{appid}/{code}/{time}/{verify}")
 	@ResponseBody
 	private String getInfo(//
 			@PathVariable("appid") String appid//
 			, @PathVariable("code") String code//
 			, @PathVariable("time") long time//
-			, @PathVariable("key") long key//
+			, @PathVariable("verify") long verify//
 	) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> data = new HashMap<>();
 		data.put("appid", appid);
 		data.put("code", code);
 		data.put("time", time);
-		data.put("key", key);
+		data.put("verify", verify);
 		result.put("data", data);
 		result.put("err", "");
 		try {
