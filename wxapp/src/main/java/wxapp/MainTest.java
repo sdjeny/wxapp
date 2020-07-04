@@ -14,6 +14,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +33,8 @@ public class MainTest {
 		SpringApplication.run(MainTest.class, args);
 	}
 
-	public MainTest() {
+	@InitBinder
+	public void init() {
 		System.out.println("init");
 	}
 

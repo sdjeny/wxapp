@@ -1,0 +1,55 @@
+<view class="container">
+	<view class="page-body">
+		<form catchsubmit="formSubmit" catchreset="formReset">
+
+			<view class="page-section">
+				<view class="page-section-title">From</view>
+				<view class="weui-cells weui-cells_after-title">
+					<view class="weui-cell weui-cell_input">
+						<view class="weui-cell__bd" style="margin: 30rpx 0">
+
+							<picker bindchange="bindFromPickerChange" value="{{from}}" range="{{array}}">
+								<view class="picker">
+									{{array[from]}}
+								</view>
+							</picker>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<view class="page-section">
+				<view class="page-section-title">To</view>
+				<view class="weui-cells weui-cells_after-title">
+					<view class="weui-cell weui-cell_input">
+						<view class="weui-cell__bd" style="margin: 30rpx 0">
+
+							<picker bindchange="bindToPickerChange" value="{{to}}" range="{{array}}">
+								<view class="picker">
+									{{array[to]}}
+								</view>
+							</picker>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<view>
+				<view class="section">
+					<view class="section__title">Date</view>
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+						<view class="picker">
+							{{date}}
+						</view>
+					</picker>
+				</view>
+
+			</view>
+
+			<view class="btn-area">
+				<button style="margin: 30rpx 0" type="primary" formType="submit">Submit</button>
+			</view>
+		</form>
+	</view>
+
+</view>
