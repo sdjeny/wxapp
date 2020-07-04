@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.apache.catalina.connector.Connector;
+import org.jsoup.Jsoup;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -31,6 +32,10 @@ public class MainTest {
 		SpringApplication.run(MainTest.class, args);
 	}
 
+	public MainTest() {
+		System.out.println("init");
+	}
+
 //	@Bean
 //	public ServletWebServerFactory servletContainer() {
 //		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
@@ -50,7 +55,7 @@ public class MainTest {
 			@PathVariable("appid") String appid//
 			, @PathVariable("code") String code//
 			, @PathVariable("tempid") String tempid//
-			, @PathVariable("verify") long verify//
+			, @PathVariable("verify") String verify//
 	) {
 		try {
 			Map<String, Object> params = new LinkedHashMap<>();
@@ -94,6 +99,33 @@ public class MainTest {
 		} catch (Throwable e) {
 			return String.format("{\"err\":\"%s\"}", e.getMessage());
 		}
+	}
+
+	@RequestMapping("/ship_search/{from}/{to}/{date}/{verify}")
+	@ResponseBody
+	private String ship_search(//
+			@PathVariable("from") int from//
+			, @PathVariable("to") int to//
+			, @PathVariable("date") String date//
+			, @PathVariable("verify") String verify//
+	) {
+		Map<String, Object> params = new LinkedHashMap<>();
+		params.put("prevDate", date);// 2020-07-05
+		params.put("departPort", getPort(from));
+		params.put("arrivalPort", getPort(to));
+		String html = HttpClientHelper.getInstance().doGet("https://www.laiu8.cn/ship/index", params);
+		String fs = "shipLines: JSON.parse('", es = "code: Number";
+		fs = ", lineList: JSON.parse('";
+		fs = "lineList: JSON.parse('";
+		String result = html.substring(html.indexOf(fs) + fs.length(), html.indexOf(es));
+		result = result.trim();
+		result = result.substring(0, result.length() - 3);
+		return result;
+	}
+
+	private String getPort(int key) {
+		// 16:北海；17:涠洲岛
+		return 0 == key ? "16" : "17";
 	}
 
 }

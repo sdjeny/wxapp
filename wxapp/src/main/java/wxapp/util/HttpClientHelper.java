@@ -146,6 +146,7 @@ public class HttpClientHelper {
 			i++;
 		}
 		apiUrl += param;
+		System.out.println(apiUrl);
 		String result = null;
 		CloseableHttpClient httpClient = getConnection();
 		CloseableHttpResponse response = null;
