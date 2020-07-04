@@ -33,10 +33,10 @@ public class MainTest {
 		SpringApplication.run(MainTest.class, args);
 	}
 
-	@InitBinder
-	public void init() {
-		System.out.println("init");
-	}
+//	@InitBinder
+//	public void init() {
+//		System.out.println("init");
+//	}
 
 //	@Bean
 //	public ServletWebServerFactory servletContainer() {
