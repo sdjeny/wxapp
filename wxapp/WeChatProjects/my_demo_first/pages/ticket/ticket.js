@@ -1,5 +1,5 @@
 // pages/ticket/ticket.js
-
+var util = require('../../utils/util.js');
 const app = getApp();
 Page({
 
@@ -9,7 +9,7 @@ Page({
     array: ['A地', 'B地'],
     from: 0,
     to: 1,
-    date: '2016-09-01',
+    date: util.formatDate(new Date(), '-'), //'2016-09-01',
     customItem: '全部'
   },
 
@@ -25,6 +25,10 @@ Page({
         to: 0
       })
     }
+  },
+
+  goto_detail: function (e) {
+
   },
 
   pickerConfirm(e) {
@@ -52,39 +56,43 @@ Page({
     let self = this;
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
     wx.showToast({
-      title: 'Welcome to ' + self.data.array[self.data.from] + " the who com from " + self.data.array[self.data.from] + " at " + self.data.date,
+      title: self.data.array[self.data.from] + "-" + self.data.array[self.data.from] + " at " + self.data.date,
       icon: 'success',
       duration: 2000
     });
 
-    wx.requestSubscribeMessage({
-      tmplIds: ['iRJV_pdxGQRFzV_UyK9xOcRlNA3Eybeqtcm0SUlXbvI'],
-      success (res) {
-        wx.login({
-          success: res => {
-            // 发送 res.code 到后台换取 openId, sessionKey, unionId        
-            var code = res.code; //返回code
-            var appId = 'wx1864668d1e6e7bba';
-            
-            wx.request({
-              url: 'http://sdjen.vicp.net/wxapp/subscribe_send/' + appId + '/' + code + '/iRJV_pdxGQRFzV_UyK9xOcRlNA3Eybeqtcm0SUlXbvI/3',
-              data: {},
-              header: {
-                'content-type': 'json'
-              },
-              success: function (res) {            
-                console.log(res);
-              },
-              complete: res => {
-                
+    wx.navigateTo({
+      url: '/pages/ship_detail/ship_detail?from=' + self.data.from + '&to=' + self.data.to + '&date=' + self.data.date
+    })
+    /*
+        wx.requestSubscribeMessage({
+          tmplIds: ['iRJV_pdxGQRFzV_UyK9xOcRlNA3Eybeqtcm0SUlXbvI'],
+          success(res) {
+            wx.login({
+              success: res => {
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId        
+                var code = res.code; //返回code
+                var appId = 'wx1864668d1e6e7bba';
+
+                wx.request({
+                  url: 'http://sdjen.vicp.net/wxapp/subscribe_send/' + appId + '/' + code + '/iRJV_pdxGQRFzV_UyK9xOcRlNA3Eybeqtcm0SUlXbvI/3',
+                  data: {},
+                  header: {
+                    'content-type': 'json'
+                  },
+                  success: function (res) {
+                    console.log(res);
+                  },
+                  complete: res => {
+
+                  }
+                })
               }
             })
+            console.log('openid为' + app.globalData.openid);
           }
         })
-        console.log('openid为' + app.globalData.openid); 
-      }
-    })
-
+    */
   },
 
   formReset(e) {

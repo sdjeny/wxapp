@@ -7,6 +7,13 @@
 			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
 		</block>
 	</view>
-	<button class="usermotto" id="A" bindtap="goto_ticket">A地登录</button>
-	<button class="usermotto" id="B" bindtap="goto_ticket">B地登录</button>
+
+	<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+		<view class="picker">
+			{{date}}
+		</view>
+	</picker>
+
+	<button class="usermotto" id="A" bindtap="goto_ticket">北海 -> 涠洲岛</button>
+	<button class="usermotto" id="B" bindtap="goto_ticket">涠洲岛 -> 北海</button>
 </view>

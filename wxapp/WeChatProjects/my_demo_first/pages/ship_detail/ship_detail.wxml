@@ -1,0 +1,20 @@
+<!--pages/ship_detail/ship_detail.wxml-->
+<text>pages/ship_detail/ship_detail.wxml</text>
+
+<view class="container">
+	<view class='mainbox' wx:if="{{init}}">
+		加载中。。。
+	</view>
+	<view class='mainbox' wx:else>
+		<view class='details' wx:for="{{details}}" wx:key="*this" wx:for-item="detail">
+			<view class='detail' bindtap="isOpen" data-index="{{detail.index}}">{{detail.plannedDepartureTime}}{{detail.shipName}}{{detail.run_time}}</view>
+			<view hidden="{{detail.hidden}}" class="hidden">
+				<view class='cabins' wx:for="{{detail.cabinList}}" wx:key="*this" data-id="{{item.cabinId}}" bindtap='linkNews' wx:for-item="cabin">
+					<view class='cabin'>
+						{{cabin.availableSeatCount}}
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

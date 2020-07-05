@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var util = require('../../utils/util.js');
 const app = getApp()
 
 Page({
@@ -7,7 +8,8 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    date: util.formatDate(new Date(), '-') //'2016-09-01'
   },
   //事件处理函数
   bindViewTap: function () {
@@ -15,16 +17,13 @@ Page({
       url: '../logs/logs'
     })
   },
-  goto_ticketA: function (d) {
-    wx.navigateTo({
-      url: '/pages/ticket/ticket',
-      data:d
-    })
-  },
   goto_ticket: function (e) {
-    console.log(e.currentTarget.id),
+    console.log(e.currentTarget.id);
+    var from = e.currentTarget.id = 'A' ? 0 : 1;
+    var to = e.currentTarget.id = 'B' ? 0 : 1;
+    let self= this;
     wx.navigateTo({
-      url: '/pages/ticket/ticket?from='+e.currentTarget.id
+      url: '/pages/ticket/ticket?from=' + e.currentTarget.id
     })
   },
   onLoad: function () {
@@ -55,6 +54,13 @@ Page({
         }
       })
     }
+  },
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
   },
   getUserInfo: function (e) {
     console.log(e)

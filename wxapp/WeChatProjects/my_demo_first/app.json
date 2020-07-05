@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/ticket/ticket",
+    "pages/ship_detail/ship_detail",
     "pages/logs/logs"
   ],
   "window": {
@@ -11,11 +12,6 @@
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json",
-  "permissions": {
-    "openapi": [
-      "templateMessage.send"
-    ]
-  }
+  "sitemapLocation": "sitemap.json"
 
 }
