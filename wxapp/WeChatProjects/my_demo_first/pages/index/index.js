@@ -17,13 +17,14 @@ Page({
       url: '../logs/logs'
     })
   },
-  goto_ticket: function (e) {
+  goto_ship_detail: function (e) {
     console.log(e.currentTarget.id);
     var from = e.currentTarget.id = 'A' ? 0 : 1;
     var to = e.currentTarget.id = 'B' ? 0 : 1;
-    let self= this;
+    let self = this;
     wx.navigateTo({
-      url: '/pages/ticket/ticket?from=' + e.currentTarget.id
+      // url: '/pages/ticket/ticket?from=' + e.currentTarget.id
+      url: '/pages/ship_detail/ship_detail?from=' + from + '&to=' + to + '&date=' + self.data.date
     })
   },
   onLoad: function () {

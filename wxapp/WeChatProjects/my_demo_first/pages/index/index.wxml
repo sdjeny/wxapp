@@ -8,12 +8,12 @@
 		</block>
 	</view>
 
-	<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+	<picker mode="date" value="{{date}}" start="2020-07-07" end="2020-09-01" bindchange="bindDateChange">
 		<view class="picker">
 			{{date}}
 		</view>
 	</picker>
 
-	<button class="usermotto" id="A" bindtap="goto_ticket">北海 -> 涠洲岛</button>
-	<button class="usermotto" id="B" bindtap="goto_ticket">涠洲岛 -> 北海</button>
+	<button class="usermotto" id="A" bindtap="goto_ship_detail">北海 -> 涠洲岛</button>
+	<button class="usermotto" id="B" bindtap="goto_ship_detail">涠洲岛 -> 北海</button>
 </view>
