@@ -1,25 +1,24 @@
 package wxapp;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
-import org.jsoup.Jsoup;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import wxapp.util.HttpClientHelper;
 import wxapp.util.JsonFactory;
@@ -28,6 +27,49 @@ import wxapp.util.JsonFactory;
 @EnableAutoConfiguration
 @RequestMapping("/wxapp")
 public class MainTest {
+
+	@Value("${http.port}")
+	private Integer port;
+
+	@Value("${server.port}")
+	private Integer httpsPort;
+
+	@Bean
+	public ServletWebServerFactory servletContainer() {
+		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
+			@Override
+			protected void postProcessContext(Context context) {
+				// 如果要强制使用https，请松开以下注释
+				// SecurityConstraint constraint = new SecurityConstraint();
+				// constraint.setUserConstraint("CONFIDENTIAL");
+				// SecurityCollection collection = new SecurityCollection();
+				// collection.addPattern("/*");
+				// constraint.addCollection(collection);
+				// context.addConstraint(constraint);
+
+				SecurityConstraint securityConstraint = new SecurityConstraint();
+				securityConstraint.setUserConstraint("CONFIDENTIAL");
+				SecurityCollection collection = new SecurityCollection();
+				collection.addMethod("post"); // 添加post方法
+				collection.addPattern("/*");
+				securityConstraint.addCollection(collection);
+				context.addConstraint(securityConstraint);
+			}
+		};
+		tomcat.addAdditionalTomcatConnectors(createStandardConnector()); // 添加http
+		return tomcat;
+	}
+
+	// 配置http
+	private Connector createStandardConnector() {
+		// 默认协议为org.apache.coyote.http11.Http11NioProtocol
+		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+		connector.setSecure(false);
+		connector.setScheme("http");
+		connector.setPort(port);
+		connector.setRedirectPort(httpsPort); // 当http重定向到https时的https端口号
+		return connector;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(MainTest.class, args);
@@ -50,6 +92,11 @@ public class MainTest {
 //		connector.setPort(8122);
 //		return connector;
 //	}
+	@RequestMapping("/hello")
+	@ResponseBody
+	private String hello() {
+		return "hello";
+	}
 
 	@RequestMapping("/subscribe_send/{appid}/{code}/{tempid}/{verify}")
 	@ResponseBody
