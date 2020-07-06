@@ -1,1 +1,19 @@
 /* pages/ship_detail/ship_detail.wxss */
+.details {
+  background: #fff;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 20rpx 30rpx 30rpx;
+  font-size: 32rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.time,
+.shipname,
+.runtime {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}

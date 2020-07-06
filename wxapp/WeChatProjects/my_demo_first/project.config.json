@@ -76,6 +76,20 @@
 					"id": -1,
 					"name": "pages/ship_detail/ship_detail",
 					"pathName": "pages/ship_detail/ship_detail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/fold/fold",
+					"pathName": "pages/fold/fold",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/fold2/fold2",
+					"pathName": "pages/fold2/fold2",
 					"scene": null
 				}
 			]

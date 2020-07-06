@@ -1,0 +1,29 @@
+<view class="li toggle" bindtap='changeToggle'>
+	<view>运费合计</view>
+	<view class='li-align'>
+		<text>6.00元</text>
+		<image class='entry' style="transform:rotate({{isShow?'90deg':'-90deg'}});" src="{{entry}}"></image>
+	</view>
+</view>
+
+<view hidden='{{isShow}}' class="li-wrap">
+	<view class='li content'>
+		<view>计费重量</view>
+		<view>1.00KG</view>
+	</view>
+	<view class='li content'>
+		<view>计重运费</view>
+		<view>7.00元</view>
+	</view>
+	<view class='li content line'>
+		<view>快递员优惠</view>
+		<view>-1.00元</view>
+	</view>
+</view>
+
+<view class="li common">
+	<view>保费</view>
+	<view>
+		<text>9.00元</text>
+	</view>
+</view>
