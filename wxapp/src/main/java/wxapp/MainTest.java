@@ -26,7 +26,7 @@ import wxapp.util.JsonFactory;
 
 @Controller
 @EnableAutoConfiguration
-@RequestMapping("/wxapp")
+@RequestMapping("/")//wxapp
 @SpringBootApplication
 public class MainTest {
 
@@ -77,6 +77,11 @@ public class MainTest {
 		SpringApplication.run(MainTest.class, args);
 	}
 
+	@RequestMapping("/.well-known/acme-challenge/UNK5IwMkU437fkNXjaBA6hDc0qHXwkdGtZj_Hr6cmao")
+	@ResponseBody
+	private String test() {
+		return "UNK5IwMkU437fkNXjaBA6hDc0qHXwkdGtZj_Hr6cmao.lN46OSErBxeuCDse6mB4R1TkvZVElAeTkCpa71HcMvE";
+	}
 //	@InitBinder
 //	public void init() {
 //		System.out.println("init");

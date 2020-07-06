@@ -1,3 +1,5 @@
+<view>{{hello}}</view>
+
 <view class="li toggle" bindtap='changeToggle'>
 	<view>运费合计</view>
 	<view class='li-align'>
