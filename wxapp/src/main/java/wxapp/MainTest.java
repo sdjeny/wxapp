@@ -12,6 +12,7 @@ import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import wxapp.util.JsonFactory;
 @Controller
 @EnableAutoConfiguration
 @RequestMapping("/wxapp")
+@SpringBootApplication
 public class MainTest {
 
 	@Value("${http.port}")
