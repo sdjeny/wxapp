@@ -102,7 +102,7 @@ public class MainTest {
 	@RequestMapping("/wxapp/hello")
 	@ResponseBody
 	private String hello() {
-		return "hello";
+		return "hello wxapp";
 	}
 
 	@RequestMapping("/wxapp/subscribe_send/{appid}/{code}/{tempid}/{verify}")
