@@ -51,6 +51,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    openid:null
-  }
+    openid: null
+  },
+  myurl: 'https://sdjen.free.idcfengye.com'
+  // myurl:'https://127.0.0.1:8123'
+  // myurl: 'http://sdjen.vicp.net/wxapp/hello'
 })

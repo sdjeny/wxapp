@@ -1,4 +1,7 @@
 // pages/fold/fold.js
+
+var util = require('../../utils/util.js');
+const app = getApp();
 Page({
 
   data: {
@@ -18,8 +21,9 @@ Page({
   onLoad: function (opts) {
     let self = this;
     wx.request({
-      // url: 'https://sdjen.free.idcfengye.com/wxapp/hello',
-      url: 'http://sdjen.vicp.net/wxapp/hello',
+      // url: 'https://sdjen.free.idcfengye.com',
+      url: app.myurl,
+      // url: 'http://sdjen.vicp.net/wxapp/hello',
       data: {},
       header: {
         'content-type': 'json'
