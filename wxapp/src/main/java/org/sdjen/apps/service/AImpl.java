@@ -1,14 +1,13 @@
-package wxapp.bean;
+package org.sdjen.apps.service;
 
 import java.util.Date;
 
+import org.sdjen.apps.dao.Dao;
+import org.sdjen.apps.entity.User;
+import org.sdjen.apps.util.DaoParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import wxapp.dao.Dao;
-import wxapp.entity.User;
-import wxapp.util.DaoParams;
 
 @Service
 @Transactional

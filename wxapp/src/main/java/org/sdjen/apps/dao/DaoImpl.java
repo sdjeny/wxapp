@@ -1,4 +1,4 @@
-package wxapp.dao;
+package org.sdjen.apps.dao;
 
 import java.util.List;
 
@@ -7,9 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.validation.constraints.NotNull;
 
+import org.sdjen.apps.util.DaoParams;
 import org.springframework.stereotype.Repository;
-
-import wxapp.util.DaoParams;
 
 @Repository
 public class DaoImpl implements Dao {

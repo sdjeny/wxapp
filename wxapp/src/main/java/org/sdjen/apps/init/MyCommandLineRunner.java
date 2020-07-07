@@ -1,13 +1,12 @@
-package wxapp.init;
+package org.sdjen.apps.init;
 
 import java.util.Arrays;
 
+import org.sdjen.apps.service.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import wxapp.bean.A;
 
 @Order(1) // @Order注解可以改变执行顺序，越小越先执行
 @Component

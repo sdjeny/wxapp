@@ -1,4 +1,4 @@
-package wxapp.init;
+package org.sdjen.apps.init;
 
 import java.util.Arrays;
 

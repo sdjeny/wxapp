@@ -1,8 +1,8 @@
-package wxapp.dao;
+package org.sdjen.apps.dao;
 
 import java.util.List;
 
-import wxapp.util.DaoParams;
+import org.sdjen.apps.util.DaoParams;
 
 public interface Dao {
 	<T> T merge(T obj);

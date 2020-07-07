@@ -1,4 +1,4 @@
-package wxapp.entity;
+package org.sdjen.apps.entity;
 
 import java.util.Date;
 

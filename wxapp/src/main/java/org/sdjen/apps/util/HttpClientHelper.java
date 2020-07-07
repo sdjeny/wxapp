@@ -1,4 +1,4 @@
-package wxapp.util;
+package org.sdjen.apps.util;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

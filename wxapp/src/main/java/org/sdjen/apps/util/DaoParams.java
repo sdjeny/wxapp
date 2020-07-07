@@ -1,4 +1,4 @@
-package wxapp.util;
+package org.sdjen.apps.util;
 
 import java.util.HashMap;
 import java.util.Map;
