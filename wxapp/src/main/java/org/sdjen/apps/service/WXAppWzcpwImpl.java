@@ -3,6 +3,7 @@ package org.sdjen.apps.service;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,15 +13,27 @@ import org.sdjen.apps.util.DaoParams;
 import org.sdjen.apps.util.EntryData;
 import org.sdjen.apps.util.HttpClientHelper;
 import org.sdjen.apps.util.JsonFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Transactional
 public class WXAppWzcpwImpl implements WXAppWzcpwService {
+	Logger logger = LoggerFactory.getLogger(WXAppWzcpwImpl.class);
 	@Autowired
 	Dao dao;
+//	@Autowired
+//	private ObjectMapper objectMapper;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@Override
 	public String getDateInitData() throws Throwable {
@@ -31,7 +44,7 @@ public class WXAppWzcpwImpl implements WXAppWzcpwService {
 		String result = dao
 				.getObject(DaoParams.get().setJpql("select json from InitDate where date=?1").setParams(today));
 		if (null == result) {
-			System.out.println("计算");
+			logger.debug("计算");
 			EntryData<String, Object> data = new EntryData<>();
 			EntryData<Integer, int[]> month = new EntryData<Integer, int[]>().setInitValue(k -> new int[] { 31, 1 });
 			calendar.add(Calendar.DATE, 30);
@@ -52,6 +65,8 @@ public class WXAppWzcpwImpl implements WXAppWzcpwService {
 			initDate.date = today;
 			initDate.json = result;
 			dao.merge(initDate);
+		} else {
+			logger.debug("直接取");
 		}
 		return result;
 	}
@@ -74,6 +89,46 @@ public class WXAppWzcpwImpl implements WXAppWzcpwService {
 
 	private String getPort(int key) {
 		return 0 == key ? "16" : "17";// 16:北海；17:涠洲岛
+	}
+
+	public String get(String url) {
+		return get(url, new HashMap<>());
+	}
+
+	public String get(String url, Map<String, ?> variables) {
+		String result = "";
+		try {
+			logger.info("I'm going to send request: " + url);
+			ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, variables);
+			if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
+				// responseEntity.getStatusCode() == HttpStatus.OK
+//				objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				result = responseEntity.getBody();
+			}
+			return result;
+		} catch (Exception e) {
+			logger.error("获取第三方天气API接口getWeather error {} ", e);
+		}
+		return result;
+	}
+
+	private void post(String url, Object variables, MediaType type) throws Throwable {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(type);
+		HttpEntity<?> request = new HttpEntity<>(variables, headers);
+		ResponseEntity<String> postForEntity = restTemplate.postForEntity(url, request, String.class);
+		String body = postForEntity.getBody();
+		System.out.println(body);
+	}
+
+	private void postJson(String url, Object variables) throws Throwable {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		HttpEntity<String> request = new HttpEntity<>(JsonFactory.toJson(variables), headers);//
+		ResponseEntity<String> postForEntity = restTemplate.postForEntity(url, request, String.class);
+		postForEntity.getStatusCode().is2xxSuccessful();
+		String body = postForEntity.getBody();
+		System.out.println(body);
 	}
 
 }
