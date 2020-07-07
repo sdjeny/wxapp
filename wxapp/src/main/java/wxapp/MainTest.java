@@ -26,7 +26,7 @@ import wxapp.util.JsonFactory;
 
 @Controller
 @EnableAutoConfiguration
-@RequestMapping("/wxapp")//
+@RequestMapping("/")//wxapp
 @SpringBootApplication
 public class MainTest {
 
@@ -99,13 +99,13 @@ public class MainTest {
 //		connector.setPort(8122);
 //		return connector;
 //	}
-	@RequestMapping("/hello")
+	@RequestMapping("/wxapp/hello")
 	@ResponseBody
 	private String hello() {
 		return "hello";
 	}
 
-	@RequestMapping("/subscribe_send/{appid}/{code}/{tempid}/{verify}")
+	@RequestMapping("/wxapp/subscribe_send/{appid}/{code}/{tempid}/{verify}")
 	@ResponseBody
 	private String subscribe_send(//
 			@PathVariable("appid") String appid//
@@ -157,7 +157,7 @@ public class MainTest {
 		}
 	}
 
-	@RequestMapping("/ship_search/{from}/{to}/{date}/{verify}")
+	@RequestMapping("/wxapp/ship_search/{from}/{to}/{date}/{verify}")
 	@ResponseBody
 	private String ship_search(//
 			@PathVariable("from") int from//
