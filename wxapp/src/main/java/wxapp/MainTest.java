@@ -26,7 +26,7 @@ import wxapp.util.JsonFactory;
 
 @Controller
 @EnableAutoConfiguration
-@RequestMapping("/")//wxapp
+@RequestMapping("/wxapp")//
 @SpringBootApplication
 public class MainTest {
 

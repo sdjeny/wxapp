@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import wxapp.dao.A;
+import wxapp.bean.A;
 
 @Order(1) // @Order注解可以改变执行顺序，越小越先执行
 @Component
