@@ -1,18 +1,11 @@
 package org.sdjen.apps.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.sdjen.apps.dao.Dao;
-import org.sdjen.apps.util.DaoParams;
-import org.sdjen.apps.util.EntryData;
+import org.sdjen.apps.service.WXAppWzcpwService;
 import org.sdjen.apps.util.HttpClientHelper;
 import org.sdjen.apps.util.JsonFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,40 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 @Controller
 @RequestMapping("/wxapp/wzcpw")
 public class WXApp_wzcpw {
 
 	@Autowired
-	Dao dao;
+	WXAppWzcpwService service;
 
 	@RequestMapping("/hello")
 	@ResponseBody
 	private String hello() throws Throwable {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		EntryData<String, Object> result = new EntryData<>();
-		EntryData<String, int[]> month = new EntryData<String, int[]>().setInitValue(k -> new int[] { 31, 1 });
-		result.put("first_day_of_week", calendar.get(Calendar.DAY_OF_WEEK) - 1);
-		Date date_from = calendar.getTime(), date_to, date;
-		calendar.add(Calendar.DATE, 30);
-		date_to = calendar.getTime();
-		result.put("date_from", dateFormat.format(date_from));
-		result.put("date_to", dateFormat.format(date_to));
-		result.put("month", month.getData());
-
-		for (calendar.setTime(date_from); (date = calendar.getTime()).compareTo(date_to) <= 0; calendar
-				.add(Calendar.DATE, 1)) {
-			String key = (calendar.get(Calendar.MONTH) + 1) + "";
-			int d = calendar.get(Calendar.DATE);
-			int[] days = month.get(key);
-			days[0] = Math.min(days[0], d);
-			days[1] = Math.max(days[1], d);
-		}
-		return "hello wxapp " + dao.getObject(DaoParams.get().setJpql("select count(*) from User")) + ""
-				+ JsonFactory.toJsonPretty(result.getData());
+		return service.getDateInitData();
 	}
 
 	@RequestMapping("/subscribe_send/{appid}/{code}/{tempid}/{verify}")
@@ -117,23 +87,7 @@ public class WXApp_wzcpw {
 			, @PathVariable("date") String date//
 			, @PathVariable("verify") String verify//
 	) {
-		Map<String, Object> params = new LinkedHashMap<>();
-		params.put("prevDate", date);// 2020-07-05
-		params.put("departPort", getPort(from));
-		params.put("arrivalPort", getPort(to));
-		String html = HttpClientHelper.getInstance().doGet("https://www.laiu8.cn/ship/index", params);
-		String fs = "shipLines: JSON.parse('", es = "code: Number";
-		fs = ", lineList: JSON.parse('";
-		fs = "lineList: JSON.parse('";
-		String result = html.substring(html.indexOf(fs) + fs.length(), html.indexOf(es));
-		result = result.trim();
-		result = result.substring(0, result.length() - 3);
-		return result;
-	}
-
-	private String getPort(int key) {
-		// 16:北海；17:涠洲岛
-		return 0 == key ? "16" : "17";
+		return service.ship_search(from, to, date);
 	}
 
 }
