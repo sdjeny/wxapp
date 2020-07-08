@@ -39,9 +39,15 @@ Page({
           'content-type': 'json'
         },
         success: function (res) {
+          var dets = res.data;
+          for (let index = 0; index < dets.length; index++) {
+            const element = dets[index];
+            element.hidden = true;
+            element.index = index;
+          }
           self.setData({
             welcomMsg: null,
-            details: res.data
+            details: dets
           })
         },
         fail: function (res) {

@@ -37,6 +37,7 @@ public class WXAppWzcpwImpl implements WXAppWzcpwService {
 
 	@Override
 	public String getDateInitData() throws Throwable {
+//		System.out.println(get("http://10.3.5.203:9080/"));
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
 		Date date_from = calendar.getTime(), date_to, date, today = dateFormat.parse(dateFormat.format(date_from));

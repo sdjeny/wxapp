@@ -9,10 +9,9 @@ import org.springframework.stereotype.Component;
  * Created by qxr4383 on 2018/12/25.
  */
 @Component
-@PropertySource(value = { "classpath:properties/httpConfig.properties" })
 @ConfigurationProperties(prefix = "http.pool.conn")
 @Data
-public class HttpPoolProperties {
+public class HttpPoolProperties {// @PropertySource(value = { "classpath:properties/httpConfig.properties" })
 	private Integer maxTotal;
 	private Integer defaultMaxPerRoute;
 	private Integer connectTimeout;
