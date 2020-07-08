@@ -39,7 +39,6 @@ Page({
           'content-type': 'json'
         },
         success: function (res) {
-          console.log('success' + JSON.stringify(res));
           self.setData({
             welcomMsg: null,
             details: res.data
