@@ -1,23 +1,41 @@
 <!--pages/ship_detail/ship_detail.wxml-->
-<text>pages/ship_detail/ship_detail.wxml</text>
 
 <view class="">
 	<!-- container -->
-	<view class='mainbox' wx:if="{{init}}">
-		加载中。。。
+	<view class='mainbox' wx:if="{{null != welcomMsg}}">
+		{{welcomMsg}}
 	</view>
 	<view class='mainbox' wx:else>
-		<view class='details' wx:for="{{details}}" wx:key="*this" wx:for-item="detail">
+		<view class='detailItems' wx:for="{{details}}" wx:key="*this" wx:for-item="detail">
 			<view class='detail' bindtap="isOpen" data-index="{{detail.index}}">
-				<view class='time'>{{detail.plannedDepartureTime}}</view>
-				<view class='shipname'>{{detail.shipName}}</view>
-				<view class='runtime'>{{detail.run_time}}</view>
+				<view>
+					<view class='departureTime'>{{detail.plannedDepartureTime}}</view>
+					<view class='startPortName'>{{detail.departureHarbourName}}</view>
+				</view>
+				<view>
+					<view class='run_time'>{{detail.run_time}}</view>
+					<view class='goto'>-></view>
+					<view class='shipName'>{{detail.shipName}}</view>
+				</view>
+				<view>
+					<view class='arrivalTime'>{{detail.plannedArrivalTime}}</view>
+					<view class='endPortName'>{{detail.arrivalHarbourName}}</view>
+				</view>
+				<view>
+					<view class='min_price'>{{detail.min_price}}起</view>
+					<view class='sale_num'>余{{detail.sale_num}}张</view>
+				</view>
 			</view>
 			<view hidden="{{detail.hidden}}" class="hidden">
-				<view class='cabins' wx:for="{{detail.cabinList}}" wx:key="*this" data-id="{{item.cabinId}}" bindtap='linkNews' wx:for-item="cabin">
-					<view class='cabin'>
-						{{cabin.availableSeatCount}}
+				<view class='cabin' wx:for="{{detail.cabinList}}" wx:key="*this" data-id="{{item.cabinId}}" bindtap='linkNews' wx:for-item="cabin">
+					<view>
+						<view class='cabinName'> {{cabin.cabinName}}</view>
 					</view>
+					<view>
+						<view class='fullTicketPrice'> {{cabin.fullTicketPrice}}</view>
+						<view class='availableSeatCount'>{{cabin.availableSeatCount}}</view>
+					</view>
+					<view class="shopping"> 购买 </view>
 				</view>
 			</view>
 		</view>

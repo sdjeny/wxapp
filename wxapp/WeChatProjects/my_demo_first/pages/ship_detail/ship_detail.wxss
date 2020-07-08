@@ -1,19 +1,74 @@
 /* pages/ship_detail/ship_detail.wxss */
-.details {
+
+.detailItems {
   background: #fff;
-  display: flex;
   align-content: center;
   align-items: center;
   justify-content: space-between;
   padding: 30rpx 20rpx 30rpx 30rpx;
   font-size: 32rpx;
   border-bottom: 1rpx solid #eee;
+  text-align: center;
 }
 
-.time,
-.shipname,
-.runtime {
+.detail,
+.cabin {
+  position: relative;
+  box-sizing: border-box;
   display: flex;
-  align-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+  font-size: 32rpx;
+}
+
+.detail {
+  font-size: 32rpx;
+}
+
+.cabin{
+  background-color: rgb(230, 227, 227);
+}
+
+.departureTime,
+.arrivalTime {
+  font-size: 45rpx;
+}
+
+.startPortName,
+.endPortName,
+.sale_num {
+  font-size: 35rpx;
+  color: rgb(150, 147, 147);
+}
+
+.run_time,
+.goto,
+.shipName
+.availableSeatCount {
+  font-size: 25rpx;
+}
+
+.cabinName{
+  font-size: 35rpx;
+  text-align: left;
+}
+
+.min_price,
+.fullTicketPrice {
+  font-size: 45rpx;
+  color: #ff0000;
+}
+
+.shopping {
+  width: 128rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 35;
+  color: #2DAF73;
+  text-align: center;
+  display: block;
 }
