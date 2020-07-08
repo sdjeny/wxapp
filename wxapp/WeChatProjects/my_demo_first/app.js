@@ -1,4 +1,6 @@
 //app.js
+
+var util = require('/utils/util.js');
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -51,10 +53,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    openid: null
+    openid: null,
   },
-   myurl: 'https://sdjen.free.idcfengye.com'
+  //  myurl: 'https://sdjen.free.idcfengye.com'
   // myurl:'https://127.0.0.1:8123'
   // myurl:'http://127.0.0.1:8122'
-  // myurl: 'http://sdjen.vicp.net/wxapp/hello'
+  myurl: 'http://sdjen.vicp.net'
 })

@@ -1,11 +1,16 @@
 <!--pages/ship_detail/ship_detail.wxml-->
 
 <view class="">
+	<view class='title'>
+		<view bindtap="predate">前一天</view>
+		<view>{{date}}</view>
+		<view>后一天</view>
+	</view>
 	<!-- container -->
 	<view class='mainbox' wx:if="{{null != welcomMsg}}">
 		{{welcomMsg}}
 	</view>
-	<view class='mainbox' wx:else>
+	<view class='mainbox' wx:elif="{{details.length>0}}">
 		<view class='detailItems' wx:for="{{details}}" wx:key="*this" wx:for-item="detail">
 			<view class='detail' bindtap="isOpen" data-index="{{detail.index}}">
 				<view>
@@ -40,4 +45,5 @@
 			</view>
 		</view>
 	</view>
+	<view wx:else>蛋疼，没票卖了，提示页面没做！</view>
 </view>

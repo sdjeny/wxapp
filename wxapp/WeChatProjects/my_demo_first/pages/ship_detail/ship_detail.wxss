@@ -1,5 +1,12 @@
 /* pages/ship_detail/ship_detail.wxss */
-
+.title{
+  display: flex;
+  /* position: relative; */
+  /* box-sizing: border-box; */
+  justify-content: space-between;
+  /* align-items: center; */
+  padding: 20rpx 30rpx;
+}
 .detailItems {
   background: #fff;
   align-content: center;
